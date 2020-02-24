@@ -1,8 +1,6 @@
 package com.leonardocardozo.marketapp.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.leonardocardozo.marketapp.entities.enums.EstadoPagamento;
 
 @Entity
@@ -24,7 +22,7 @@ public abstract class Pagamento implements Serializable{
 	private Integer id;
 	private Integer estadoPagamento;
 
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId
