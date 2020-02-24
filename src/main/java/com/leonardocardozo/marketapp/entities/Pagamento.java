@@ -1,6 +1,8 @@
 package com.leonardocardozo.marketapp.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +27,8 @@ public abstract class Pagamento implements Serializable{
 	@JoinColumn(name = "pedido_id")
 	@MapsId
 	private Pedido pedido;
+	
+	
 
 	public Pagamento() {
 		

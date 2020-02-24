@@ -13,6 +13,7 @@ import com.leonardocardozo.marketapp.entities.Cidade;
 import com.leonardocardozo.marketapp.entities.Cliente;
 import com.leonardocardozo.marketapp.entities.Endereco;
 import com.leonardocardozo.marketapp.entities.Estado;
+import com.leonardocardozo.marketapp.entities.ItemPedido;
 import com.leonardocardozo.marketapp.entities.Pagamento;
 import com.leonardocardozo.marketapp.entities.PagamentoComBoleto;
 import com.leonardocardozo.marketapp.entities.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.leonardocardozo.marketapp.repositories.CidadeRepository;
 import com.leonardocardozo.marketapp.repositories.ClienteRepository;
 import com.leonardocardozo.marketapp.repositories.EnderecoRepository;
 import com.leonardocardozo.marketapp.repositories.EstadoRepository;
+import com.leonardocardozo.marketapp.repositories.ItemPedidoRepository;
 import com.leonardocardozo.marketapp.repositories.PagamentoRepository;
 import com.leonardocardozo.marketapp.repositories.PedidoRepository;
 import com.leonardocardozo.marketapp.repositories.ProdutoRepository;
@@ -56,6 +58,8 @@ public class MarketAppApplication implements CommandLineRunner {
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
 	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MarketAppApplication.class, args);
@@ -108,6 +112,16 @@ public class MarketAppApplication implements CommandLineRunner {
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.0, 1, 2000.0);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.0, 2, 80.0);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.0, 1, 800.0);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().add(ip1);
+		p2.getItens().add(ip3);
+		p3.getItens().add(ip2);
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2 ,p3));
@@ -117,6 +131,6 @@ public class MarketAppApplication implements CommandLineRunner {
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
-		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 }
