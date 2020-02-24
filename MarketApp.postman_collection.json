@@ -6,12 +6,94 @@
 	},
 	"item": [
 		{
-			"name": "getCategoria",
+			"name": "Buscar Categoria por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b57681e4-f6fd-422d-9dd5-f29cee6e1e6f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Test for responsee\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var jsonExpected = {",
+							"        \"id\": 1,",
+							"        \"nome\": \"Informática\",",
+							"        \"produtos\": [",
+							"            {",
+							"                \"id\": 1,",
+							"                \"nome\": \"Computador\",",
+							"                \"preco\": 2000.0",
+							"            },",
+							"            {",
+							"                \"id\": 2,",
+							"                \"nome\": \"Impressora\",",
+							"                \"preco\": 800.0",
+							"            },",
+							"            {",
+							"                \"id\": 3,",
+							"                \"nome\": \"Mouse\",",
+							"                \"preco\": 80.0",
+							"            }",
+							"        ]",
+							"    }",
+							"    pm.expect(jsonData).to.eql(jsonExpected);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/categorias/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categorias",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Categoria por id inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b7f95b5-db0b-4a92-8569-cdc6cec34245",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/categorias/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categorias",
+						"3"
+					]
 				}
 			},
 			"response": []

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.leonardocardozo.marketapp.entities.Categoria;
 import com.leonardocardozo.marketapp.repositories.CategoriaRepository;
+import com.leonardocardozo.marketapp.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -16,6 +17,8 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> lista = repo.findById(id);
-		return lista.orElseThrow(null);
+		return lista.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()
+				));
 	}
 }
