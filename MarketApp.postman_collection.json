@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "871befd8-50da-4406-88a0-8ae74e804da6",
+		"name": "MarketApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Buscar Categoria por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b57681e4-f6fd-422d-9dd5-f29cee6e1e6f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Test for response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var jsonExpected = {",
+							"        \"id\": 1,",
+							"        \"nome\": \"Informática\",",
+							"        \"produtos\": [",
+							"            {",
+							"                \"id\": 1,",
+							"                \"nome\": \"Computador\",",
+							"                \"preco\": 2000.0",
+							"            },",
+							"            {",
+							"                \"id\": 2,",
+							"                \"nome\": \"Impressora\",",
+							"                \"preco\": 800.0",
+							"            },",
+							"            {",
+							"                \"id\": 3,",
+							"                \"nome\": \"Mouse\",",
+							"                \"preco\": 80.0",
+							"            }",
+							"        ]",
+							"    }",
+							"    pm.expect(jsonData).to.eql(jsonExpected);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/categorias/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categorias",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Categoria por id inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b7f95b5-db0b-4a92-8569-cdc6cec34245",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/categorias/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categorias",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Cliente por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b7f95b5-db0b-4a92-8569-cdc6cec34245",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Test for response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var jsonExpected = {",
+							"        \"id\": 1,",
+							"        \"nome\": \"Maria Silve\",",
+							"        \"email\": \"maria@gmail.com\",",
+							"        \"cpfOuCnpj\": \"36378912377\",",
+							"        \"tipo\": \"PESSOAFISICA\",",
+							"        \"enderecos\": [",
+							"            {",
+							"                \"id\": 1,",
+							"                \"logradouro\": \"Rua Flores\",",
+							"                \"numero\": \"300\",",
+							"                \"complemento\": \"Apto 203\",",
+							"                \"bairro\": \"Jardim\",",
+							"                \"cep\": \"38220834\",",
+							"                \"cidade\": {",
+							"                    \"id\": 1,",
+							"                    \"nome\": \"Uberlândia\",",
+							"                    \"estado\": {",
+							"                        \"id\": 1,",
+							"                        \"nome\": \"Minas Gerais\"",
+							"                    }",
+							"                }",
+							"            },",
+							"            {",
+							"                \"id\": 2,",
+							"                \"logradouro\": \"Avenida Matos\",",
+							"                \"numero\": \"105\",",
+							"                \"complemento\": \"Sala 800\",",
+							"                \"bairro\": \"Centro\",",
+							"                \"cep\": \"38777012\",",
+							"                \"cidade\": {",
+							"                    \"id\": 2,",
+							"                    \"nome\": \"São Paulo\",",
+							"                    \"estado\": {",
+							"                        \"id\": 2,",
+							"                        \"nome\": \"São Paulo\"",
+							"                    }",
+							"                }",
+							"            }",
+							"        ],",
+							"        \"telefones\": [",
+							"            \"27363323\",",
+							"            \"93838393\"",
+							"        ],",
+							"        \"pedidos\": [",
+							"            {",
+							"                \"id\": 1,",
+							"                \"instant\": \"30/09/2017 01:32\",",
+							"                \"pagamento\": {",
+							"                    \"id\": 1,",
+							"                    \"estadoPagamento\": \"QUITADO\",",
+							"                    \"numeroDeparcelas\": 6",
+							"                },",
+							"                \"endetecoDeEntrega\": {",
+							"                    \"id\": 1,",
+							"                    \"logradouro\": \"Rua Flores\",",
+							"                    \"numero\": \"300\",",
+							"                    \"complemento\": \"Apto 203\",",
+							"                    \"bairro\": \"Jardim\",",
+							"                    \"cep\": \"38220834\",",
+							"                    \"cidade\": {",
+							"                        \"id\": 1,",
+							"                        \"nome\": \"Uberlândia\",",
+							"                        \"estado\": {",
+							"                            \"id\": 1,",
+							"                            \"nome\": \"Minas Gerais\"",
+							"                        }",
+							"                    }",
+							"                },",
+							"                \"itens\": [",
+							"                    {",
+							"                        \"desconto\": 0.0,",
+							"                        \"quantidade\": 1,",
+							"                        \"preco\": 2000.0,",
+							"                        \"produto\": {",
+							"                            \"id\": 1,",
+							"                            \"nome\": \"Computador\",",
+							"                            \"preco\": 2000.0",
+							"                        }",
+							"                    },",
+							"                    {",
+							"                        \"desconto\": 0.0,",
+							"                        \"quantidade\": 2,",
+							"                        \"preco\": 80.0,",
+							"                        \"produto\": {",
+							"                            \"id\": 3,",
+							"                            \"nome\": \"Mouse\",",
+							"                            \"preco\": 80.0",
+							"                        }",
+							"                    }",
+							"                ]",
+							"            },",
+							"            {",
+							"                \"id\": 2,",
+							"                \"instant\": \"10/10/2017 10:35\",",
+							"                \"pagamento\": {",
+							"                    \"id\": 2,",
+							"                    \"estadoPagamento\": \"PENDENTE\",",
+							"                    \"dataVencimento\": \"20/10/2017\",",
+							"                    \"dataPagamento\": null",
+							"                },",
+							"                \"endetecoDeEntrega\": {",
+							"                    \"id\": 2,",
+							"                    \"logradouro\": \"Avenida Matos\",",
+							"                    \"numero\": \"105\",",
+							"                    \"complemento\": \"Sala 800\",",
+							"                    \"bairro\": \"Centro\",",
+							"                    \"cep\": \"38777012\",",
+							"                    \"cidade\": {",
+							"                        \"id\": 2,",
+							"                        \"nome\": \"São Paulo\",",
+							"                        \"estado\": {",
+							"                            \"id\": 2,",
+							"                            \"nome\": \"São Paulo\"",
+							"                        }",
+							"                    }",
+							"                },",
+							"                \"itens\": [",
+							"                    {",
+							"                        \"desconto\": 100.0,",
+							"                        \"quantidade\": 1,",
+							"                        \"preco\": 800.0,",
+							"                        \"produto\": {",
+							"                            \"id\": 2,",
+							"                            \"nome\": \"Impressora\",",
+							"                            \"preco\": 800.0",
+							"                        }",
+							"                    }",
+							"                ]",
+							"            }",
+							"        ]",
+							"    };",
+							"    pm.expect(jsonData).to.eql(jsonExpected);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Cliente  por id inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b7f95b5-db0b-4a92-8569-cdc6cec34245",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Pedido por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pedidos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Pedido por id inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a76978c5-9248-4abb-91a8-0c6b7baaea0c",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pedidos/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
