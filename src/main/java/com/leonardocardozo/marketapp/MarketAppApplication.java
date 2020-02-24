@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.leonardocardozo.marketapp.entities.Categoria;
 import com.leonardocardozo.marketapp.entities.Cidade;
+import com.leonardocardozo.marketapp.entities.Cliente;
+import com.leonardocardozo.marketapp.entities.Endereco;
 import com.leonardocardozo.marketapp.entities.Estado;
 import com.leonardocardozo.marketapp.entities.Produto;
+import com.leonardocardozo.marketapp.entities.enums.TipoCliente;
 import com.leonardocardozo.marketapp.repositories.CategoriaRepository;
 import com.leonardocardozo.marketapp.repositories.CidadeRepository;
+import com.leonardocardozo.marketapp.repositories.ClienteRepository;
+import com.leonardocardozo.marketapp.repositories.EnderecoRepository;
 import com.leonardocardozo.marketapp.repositories.EstadoRepository;
 import com.leonardocardozo.marketapp.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class MarketAppApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MarketAppApplication.class, args);
@@ -62,9 +73,19 @@ public class MarketAppApplication implements CommandLineRunner {
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2, c3));
 		
+		Cliente cli1 = new Cliente(null, "Maria Silve", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27363323","93838393"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2 ,p3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 	}
 }
